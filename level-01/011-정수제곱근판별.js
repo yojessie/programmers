@@ -7,8 +7,18 @@
 // n은 1이상, 50000000000000 이하인 양의 정수입니다.
 
 function solution(n) {
-  var answer = 0;
+  var answer = -1;
+
+  for (let x = 1; x <= n; x++) {
+    if (n == x * x) {
+      return (answer = (x + 1) * (x + 1));
+    }
+  }
+
   return answer;
 }
 
-//
+// answer의 기본값을 -1로 두고, 어떤 수의 제곱이 n이 되는 경우에만 answer값을 바꾸도록 했다.
+// 어떤수의 제곱이 n이 되는경우에 그냥 answer = (x + 1) * (x + 1)라고 정의만하고 끝냈더니,
+// 최대값이 크기때문에 그 수만큼 반복문이 돌아가느라 시간초과로 실패했었다.
+// 그래서 제곱근 수를 찾으면 반복문이 종료되도록 return 을 추가했다.
