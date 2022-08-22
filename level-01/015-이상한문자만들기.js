@@ -17,17 +17,53 @@ function solution(s) {
 
   for (let i = 0; i < answer.length; i++) {
     for (let j = 0; j < answer[i].length; j++) {
-      if (j % 2 == 0) {
-        console.log(answer[i][j].toUpperCase());
-      }
+      answer[i][j] =
+        j % 2 == 0 ? answer[i][j].toUpperCase() : answer[i][j].toLowerCase();
+      // ??????
     }
   }
-
   return answer;
 }
 
-//
+// 각각 단계의 로직은 로그로 찍어보면 맞는데, 구한 값을 어떻게 할당해야할지 몰라 해맸다...
+// 짝수 자릿수의 문자를 대문자로 변환한것을 어떻게 할당시키는가 하고.. 뭔가 바보같은 고민
 
-console.log(answer[i][j].toUpperCase());
+// 그러다 도저히 안풀려서 전체문자를 각각 대문자와 소문자로 변환한것을 자리에 맞게 할당시키는 방법으로 풀었다.
 
-// 각각 단계의 로직은 맞는데, 구한 값을 어떻게 할당해야할지 몰라 해맸다.
+function solution(s) {
+  var answer = [];
+  let capital = s.toUpperCase().split(" ");
+  let small = s.toLowerCase().split(" ");
+
+  for (let i = 0; i < capital.length; i++) {
+    let a = [];
+
+    for (let j = 0; j < capital[i].length; j++) {
+      a.push(j % 2 == 0 ? capital[i][j] : small[i][j]);
+    }
+    a = a.join("");
+    answer.push(a);
+  }
+
+  answer = answer.join(" ");
+  return answer;
+}
+
+// ㅠㅠㅠㅠㅠ 진짜 오래걸려서 통과했다.
+
+// 자릿수와 관련된 문제는 map을 활용하는게 훨씬 좋았을 것 같다. 기본으로 인덱스값을 제공하기 떄문에.
+// 그리고 할당은.. 구지 하지않고 값을 리턴시키는 방법으로 정리하면 됐던것 같다.
+
+function solution(s) {
+  return s
+    .split(" ")
+    .map((a) => {
+      return a
+        .split("")
+        .map((b, i) => {
+          return i % 2 == 0 ? b.toUpperCase() : b.toLowerCase();
+        })
+        .join("");
+    })
+    .join(" ");
+}
