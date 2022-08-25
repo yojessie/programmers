@@ -38,3 +38,37 @@ function solution(n) {
 // 4는 2의배수이므로 체크하지 않아도되는 상황이 생기니까
 // 배열에 숫자를 직접 넣어놓고 하는 것은 문제가 되므로
 // 범위 내 숫자 수만큼 boolean을 넣어놓고 ture, flase로 체크하는 방식을 사용하는구나 했다.
+
+function solution(n) {
+  let answer = 0;
+
+  let arr = Array(n + 1)
+    .fill(true)
+    .fill(false, 0, 2);
+  // Array(n) n개만큼 배열 생성. 인덱스값 활용을 위해 0자리까지 만들어주려고 +1
+  // 일단 모두 true로 채워놓고, 소수가 아닌것은 false로 변경 예정
+  // 0과 1은 소수에서 제외하므로 미리 false 처리
+  // (false를 0번째부터 2번째 '전'까지 채움)
+
+  for (let i = 2; i * i <= n; i++) {
+    // 최적화를 위해 제곱근이 되는 수 까지만 소수를 확인하면 된다는 점을 이용
+    // 10 * 10 = 100 이므로 n이 100이라면 2 ~ 10까지만 확인하면 된다
+    if (arr[i]) {
+      // 만약 확인할 숫자가 true이면
+      // 그 숫자가 어떤 수의 배수가 되는 수인지 확인하기 위해 한번더 loop
+      for (let j = i * i; j <= n; j += i) {
+        // 이부분 이해가 안됨 ㅠㅠ
+        arr[j] = false;
+      }
+    }
+  }
+
+  for (let i = 2; i <= n; ++i) {
+    // arr 아이템을 모두 체크해서 true의 갯수만큼 answer에 더해준다.
+    if (arr[i] == true) {
+      answer++;
+    }
+  }
+
+  return answer;
+}
