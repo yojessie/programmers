@@ -3,7 +3,7 @@
 
 function solution(s) {
     let answer = ''
-    const unique = [...new Set(s)].sort().join("")
+    const unique = [...new Set(s)].sort()
     for (let i of unique) {
         const temp = s.replace(i, "")
         if (!temp.includes(i)) answer += i
