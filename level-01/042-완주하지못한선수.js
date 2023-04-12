@@ -65,3 +65,17 @@ function solution(participant, completion) {
 // 두 자료의 값이 다 동일한데 딱 하나만 다른거니까.. sort하면 겹치는 자료는 모두 순서가 같아질 것이고,
 // 다른값 하나가 나왔을때 순서가 틀어질테니, 그때 안맞는 자리의 participant 값을 출력하면 끗???
 // ... 허무하고 재밌다 ㅎ
+
+
+// 2023-04-04 업데이트
+// 해시테이블을 배우고 map을 이용해 다시 문제를 해결했다.
+
+function solution(p, c) {    
+  const table = new Map()
+  p.forEach((e) => table.set(e, table.get(e) + 1 || 1))
+  c.forEach((e) => table.set(e, table.get(e) - 1 || -1))
+  
+  for ([k, v] of table) {
+      if (v == 1) return k
+  }
+}
